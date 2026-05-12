@@ -25,5 +25,5 @@ public class Comuna {
         String nombre;
 
         @Column(name = "id_region", nullable=false)
-        Long id_region;
+        Long idRegion;
 }
