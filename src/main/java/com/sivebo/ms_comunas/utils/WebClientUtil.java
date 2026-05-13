@@ -1,5 +1,6 @@
 package com.sivebo.ms_comunas.utils;
 
+import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.reactive.function.client.WebClientResponseException;
 
@@ -7,12 +8,19 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
+@Component
 @RequiredArgsConstructor
 public class WebClientUtil {
 
-	private static WebClient webClient;
+	private final WebClient webClient;
 
-    public static void validateMicroService(Long id, String name){
+	
+	public WebClientUtil(WebClient.Builder webClientBuilder) {
+		this.webClient = webClientBuilder.baseUrl("http://localhost:8081").build();
+	}
+
+	
+    	public void validateMicroService(Long id, String name){
                 try {
 			webClient.get()
 				.uri("api/v1/" + name + "/{id}", id)

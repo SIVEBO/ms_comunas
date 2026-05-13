@@ -22,6 +22,8 @@ public class ComunaService {
 
         private final ComunaRepository comunaRepository;
 
+        private final WebClientUtil webClientUtil;
+
         private ComunaResponseDTO mapToDTO(Comuna comuna) {
                 return new ComunaResponseDTO(
                         comuna.getId(), 
@@ -53,7 +55,7 @@ public class ComunaService {
         }
 
         public ComunaResponseDTO create(ComunaRequestDTO dto) {
-                WebClientUtil.validateMicroService(dto.getIdRegion(), "region");
+                webClientUtil.validateMicroService(dto.getIdRegion(), "region");
                 return mapToDTO(comunaRepository.save(
                         new Comuna(
                                 null,
@@ -65,7 +67,7 @@ public class ComunaService {
 
         public Optional<ComunaResponseDTO> update(Long id, ComunaRequestDTO dto) {
                 return comunaRepository.findById(id).map(comuna -> {
-                        WebClientUtil.validateMicroService(dto.getIdRegion(), "region");
+                        webClientUtil.validateMicroService(dto.getIdRegion(), "region");
                         comuna.setNombre(dto.getNombre());
                         comuna.setIdRegion(dto.getIdRegion());
                         return mapToDTO(comunaRepository.save(comuna));

@@ -31,7 +31,7 @@ public class DataInitializer implements CommandLineRunner{
                 comunaRepository.save(new Comuna(
                         null,
                         "Providencia",
-                        2L
+                        1L
                 ));
                 log.info(">>> Comunas iniciales cargadas exitosamente.");
         }

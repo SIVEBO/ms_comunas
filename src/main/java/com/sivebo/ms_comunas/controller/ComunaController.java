@@ -51,7 +51,7 @@ public class ComunaController {
 
                 if (idRegion == null && nombre == null){
                         return ResponseEntity.badRequest().body("Debe proporcionar un atrinbuto de búsqueda valido");
-                }else if (idRegion != null && nombre == null){
+                }else if (idRegion != null && nombre != null){
                         return ResponseEntity.badRequest().body("Solo se permite un atributo de búsqueda a la vez");
                 }else if (nombre != null){
                         log.info(">>> Buscando comuna por nombre: {}", nombre);
