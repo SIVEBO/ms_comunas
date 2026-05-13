@@ -4,19 +4,18 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.reactive.function.client.WebClientResponseException;
 
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Component
-@RequiredArgsConstructor
+//@RequiredArgsConstructor
 public class WebClientUtil {
 
 	private final WebClient webClient;
 
 	
-	public WebClientUtil(WebClient.Builder webClientBuilder) {
-		this.webClient = webClientBuilder.baseUrl("http://localhost:8081").build();
+	public WebClientUtil() {
+		this.webClient = WebClient.create("http://localhost:8081/");
 	}
 
 	
@@ -31,7 +30,7 @@ public class WebClientUtil {
 
                 } catch (WebClientResponseException.NotFound webException) {
 			throw new RuntimeException(
-				name + "con id " + id + "no existe en el microservicio.");
+				name + " con id " + id + " no existe en el microservicio.");
                 } catch (Exception exception) {
 			throw new RuntimeException(
 				"No se pudo conectar con el microservicio: " + exception.getMessage());
