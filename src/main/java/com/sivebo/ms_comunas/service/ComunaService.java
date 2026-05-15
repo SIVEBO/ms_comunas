@@ -5,6 +5,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
+import org.springframework.web.reactive.function.client.WebClient;
 
 import com.sivebo.ms_comunas.dto.ComunaRequestDTO;
 import com.sivebo.ms_comunas.dto.ComunaResponseDTO;
@@ -22,7 +23,9 @@ public class ComunaService {
 
         private final ComunaRepository comunaRepository;
 
-        private final WebClientUtil webClientUtil;
+        //private final WebClientUtil webClientUtil;
+
+        private final WebClient regionesWebClient;
 
         private ComunaResponseDTO mapToDTO(Comuna comuna) {
                 return new ComunaResponseDTO(
@@ -55,7 +58,7 @@ public class ComunaService {
         }
 
         public ComunaResponseDTO create(ComunaRequestDTO dto) {
-                webClientUtil.validateMicroService(dto.getIdRegion(), "region");
+                WebClientUtil.validateMicroService(dto.getIdRegion(), "region", regionesWebClient);
                 return mapToDTO(comunaRepository.save(
                         new Comuna(
                                 null,

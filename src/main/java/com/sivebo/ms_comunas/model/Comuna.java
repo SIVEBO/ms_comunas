@@ -21,7 +21,7 @@ public class Comuna {
         @GeneratedValue(strategy=GenerationType.IDENTITY)
         Long id;
 
-        @Column(name = "nombre_comuna", nullable=false, length=30)
+        @Column(name = "nombre_comuna", nullable=false, length=30, unique=true)
         String nombre;
 
         @Column(name = "id_region", nullable=false)
