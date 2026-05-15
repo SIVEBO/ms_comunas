@@ -1,12 +1,13 @@
 package com.sivebo.ms_comunas.utils;
 
+import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.reactive.function.client.WebClientResponseException;
 
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-//@Component
+@Component
 public class WebClientUtil {
 	
     	public void validateMicroService(Long id, String name_service, WebClient webClient) {

@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 
@@ -23,8 +24,9 @@ public class ComunaService {
 
         private final ComunaRepository comunaRepository;
 
-        //private final WebClientUtil webClientUtil;
+        private final WebClientUtil webClientUtil;
 
+        @Qualifier("regionesWebClient")
         private final WebClient regionesWebClient;
 
         private ComunaResponseDTO mapToDTO(Comuna comuna) {
@@ -58,7 +60,7 @@ public class ComunaService {
         }
 
         public ComunaResponseDTO create(ComunaRequestDTO dto) {
-                WebClientUtil.validateMicroService(dto.getIdRegion(), "region", regionesWebClient);
+                webClientUtil.validateMicroService(dto.getIdRegion(), "region", regionesWebClient);
                 return mapToDTO(comunaRepository.save(
                         new Comuna(
                                 null,
@@ -70,7 +72,7 @@ public class ComunaService {
 
         public Optional<ComunaResponseDTO> update(Long id, ComunaRequestDTO dto) {
                 return comunaRepository.findById(id).map(comuna -> {
-                        webClientUtil.validateMicroService(dto.getIdRegion(), "region");
+                        webClientUtil.validateMicroService(dto.getIdRegion(), "region", regionesWebClient);
                         comuna.setNombre(dto.getNombre());
                         comuna.setIdRegion(dto.getIdRegion());
                         return mapToDTO(comunaRepository.save(comuna));
