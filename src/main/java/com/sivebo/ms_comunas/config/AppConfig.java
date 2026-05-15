@@ -12,6 +12,12 @@ public class AppConfig {
         @Value("${ms.regiones.url}")
         private String regionesBaseUrl;
         
+
+        @Bean
+        public WebClient.Builder webClientBuilder() {
+                return WebClient.builder();
+        }
+
         @Bean
         public WebClient regionesWebClient(WebClient.Builder builder) {
                 return builder
