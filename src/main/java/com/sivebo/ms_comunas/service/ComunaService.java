@@ -60,7 +60,7 @@ public class ComunaService {
         }
 
         public ComunaResponseDTO create(ComunaRequestDTO dto) {
-                webClientUtil.validateMicroService(dto.getIdRegion(), "region", regionesWebClient);
+                webClientUtil.validateMicroService(dto.getIdRegion(), "regiones", regionesWebClient);
                 return mapToDTO(comunaRepository.save(
                         new Comuna(
                                 null,
@@ -72,7 +72,7 @@ public class ComunaService {
 
         public Optional<ComunaResponseDTO> update(Long id, ComunaRequestDTO dto) {
                 return comunaRepository.findById(id).map(comuna -> {
-                        webClientUtil.validateMicroService(dto.getIdRegion(), "region", regionesWebClient);
+                        webClientUtil.validateMicroService(dto.getIdRegion(), "regiones", regionesWebClient);
                         comuna.setNombre(dto.getNombre());
                         comuna.setIdRegion(dto.getIdRegion());
                         return mapToDTO(comunaRepository.save(comuna));

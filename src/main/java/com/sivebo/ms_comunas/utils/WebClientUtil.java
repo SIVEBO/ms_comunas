@@ -13,7 +13,7 @@ public class WebClientUtil {
     	public void validateMicroService(Long id, String name_service, WebClient webClient) {
                 try {
 			webClient.get()
-				.uri("api/v1/" + name_service + "/{id}", id)
+				.uri("/api/v1/" + name_service + "/{id}", id)
 				.retrieve()
 				.bodyToMono(String.class)
 				.block();
